@@ -48,4 +48,21 @@ self.addEventListener("fetch", event =>{
         event.respondWith(fetch(event.request));
         return;
     }
+
+    //handle runtime GET requests for data from /api routes
+    if (event.request.url.includes("/api/transaction")) {
+  // make network request and fallback to cache if network request fails (offline)
+        event.respondWith(
+            caches.open(RUNTIME_CACHE).then(cache => {
+                return fetch(event.request)
+                    .then(response => {
+                        caches.put(event.request, response.clone());
+                        return response;
+                    })
+                    .catch(() => caches.match(event.request));
+            })
+        );
+        return;
+    }
+
 })
