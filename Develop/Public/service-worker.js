@@ -5,6 +5,8 @@ const FILES_TO_CACHE = [
     '/',
     '/public/index.html',
     '/public/style.css',
+    '/Public/Icons/icon-192x192.png',
+    '/Public.Icons/icon-512x512.png'
 ];
 
 const CACHE_NAME ="static-cahce-v2";
