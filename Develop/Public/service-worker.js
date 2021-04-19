@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 //files to cache
 const FILES_TO_CACHE = [
     '/',
@@ -70,7 +72,14 @@ self.addEventListener("fetch", event =>{
             if (cachesResponse) {
                 return cachedResponse;
             }
-        })
-    )
 
-})
+            return caches.open(RUNTIME_CACHE).then(cache => {
+                return fetch(event.request).then(resposne => {
+                    return cache.put(event.request, response.clone()).then(() =>{
+                        return response;
+                    });
+                });
+            });
+        })
+    );
+});
