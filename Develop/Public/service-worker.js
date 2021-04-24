@@ -1,5 +1,9 @@
 const { response } = require("express");
 
+self.addEventListener('install', (e) => {
+    console.log('[Service Worker] Install');
+  });
+
 //files to cache
 const FILES_TO_CACHE = [
     '/',
@@ -11,15 +15,17 @@ const FILES_TO_CACHE = [
     '/Public.Icons/icon-512x512.png'
 ];
 
-const STATIC_CACHE ="static-cahce-v2";
-const RUNTIME_CACHE = "runtime-cache";
+const CACHE_NAME ="static-cahce-v2";
+const DATA_CACHE_NAME = "data-cache-v1";
 
-self.addEventListener("install" , event => {
-    event.waitUnitl(
-        caches
-        .open(STATIC_CACHE)
+self.addEventListener("install" , (e)=> {
+    console.log('[Service Worker] Install');
+    e.waitUnitl( async () => {
+         caches
+        .open(CACHE_NAME)
         .then(cache => cache.addAll(FILES_TO_CACHE))
         .then(() => self.skipWaiting())
+    }
     );
 });
 
@@ -45,7 +51,7 @@ self.addEventListener("activate" , event => {
     );
 });
 
-self.addEventListener("fetch", event =>{
+self.addEventListener("fetch", (e) => {
     // non GET requests are not cached and requests to other origins are not cached
     if(
         event.request.method !== "GET" ||
