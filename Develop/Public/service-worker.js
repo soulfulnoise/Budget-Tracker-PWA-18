@@ -11,13 +11,13 @@ const FILES_TO_CACHE = [
     '/Public.Icons/icon-512x512.png'
 ];
 
-const CACHE_NAME ="static-cahce-v2";
+const STATIC_CACHE ="static-cahce-v2";
 const RUNTIME_CACHE = "runtime-cache";
 
 self.addEventListener("install" , event => {
     event.waitUnitl(
         caches
-        .open(CACHE_NAME)
+        .open(STATIC_CACHE)
         .then(cache => cache.addAll(FILES_TO_CACHE))
         .then(() => self.skipWaiting())
     );
