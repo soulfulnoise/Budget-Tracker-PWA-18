@@ -1,9 +1,5 @@
 const { response } = require("express");
 
-self.addEventListener('install', (e) => {
-    console.log('[Service Worker] Install');
-  });
-
 //files to cache
 const FILES_TO_CACHE = [
     '/',
