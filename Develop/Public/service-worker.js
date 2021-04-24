@@ -17,7 +17,7 @@ const RUNTIME_CACHE = "runtime-cache";
 self.addEventListener("install" , event => {
     event.waitUnitl(
         caches
-        .open(STATIC_CACHE)
+        .open(CACHE_NAME)
         .then(cache => cache.addAll(FILES_TO_CACHE))
         .then(() => self.skipWaiting())
     );
