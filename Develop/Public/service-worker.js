@@ -4,6 +4,8 @@ const { response } = require("express");
 const FILES_TO_CACHE = [
     '/',
     '/public/index.html',
+    "/public/index.js",
+    "/mainfest.webmanifest",
     '/public/style.css',
     '/Public/Icons/icon-192x192.png',
     '/Public.Icons/icon-512x512.png'
