@@ -1,25 +1,28 @@
-const { response } = require("express");
+//const { response } = require("express");
 
 //files to cache
 const FILES_TO_CACHE = [
     '/',
     '/public/index.html',
-    "/public/index.js",
-    "/mainfest.webmanifest",
+    '/public/index.js',
+    '/mainfest.webmanifest',
     '/public/style.css',
     '/Public/Icons/icon-192x192.png',
     '/Public.Icons/icon-512x512.png'
 ];
 
-const CACHE_NAME ="static-cahce-v2";
+const CACHE_NAME ='static-cahce-v2';
 const DATA_CACHE_NAME = "data-cache-v1";
 
-self.addEventListener("install" , (e)=> {
-    console.log('[Service Worker] Install');
+self.addEventListener('install' ,  e => {
+    console.log('Service Worker: Install');
     e.waitUnitl( async () => {
          caches
         .open(CACHE_NAME)
-        .then(cache => cache.addAll(FILES_TO_CACHE))
+        .then(cache => {
+            console.log('Service Worker: Caching Files');
+        cache.addAll(FILES_TO_CACHE)
+        })
         .then(() => self.skipWaiting())
     }
     );
