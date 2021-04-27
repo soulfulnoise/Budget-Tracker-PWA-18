@@ -9,7 +9,7 @@ const FILES_TO_CACHE = [
     "/Public.Icons/icon-512x512.png"
 ];
 
-const CACHE_NAME ='static-cahce-v2';
+const CACHE_NAME ="static-cahce-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
 const CACHE_NAME = "static-cache-v2";
