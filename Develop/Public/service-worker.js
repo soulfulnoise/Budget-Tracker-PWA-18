@@ -17,7 +17,7 @@ const DATA_CACHE_NAME = "data-cache-v1";
 self.addEventListener("install", function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log("Your files were pre-cached successfully!");
+      console.log("-cached successfully!");
       return cache.addAll(FILES_TO_CACHE);
     })
   );
@@ -67,10 +67,12 @@ self.addEventListener("fetch", function(evt) {
     return;
   }
 
-  // if the request is not for the API, serve static assets using "offline-first" approach.
   evt.respondWith(
-    caches.match(evt.request).then(function(response) {
-      return response || fetch(evt.request);
+    caches.open(CACHE_NAME).then(cache =>{
+      return cache.match(evt.request).then(response => {
+        return response || fetch(evt.request);
+      });
     })
+
   );
 });
